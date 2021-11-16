@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class PlayerController : MonoBehaviour
 {
     private bool jumped;
@@ -32,4 +34,6 @@ public class PlayerController : MonoBehaviour
             transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
         }
     }
+
+    
 }
