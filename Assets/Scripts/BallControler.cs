@@ -16,7 +16,7 @@ public class BallControler : MonoBehaviour
     void Start()
     {
         //assign scale
-        ball.GetComponent<Transform>().localScale = new Vector3(size * 0.4f, size * 0.4f, 1f);
+        ball.GetComponent<Transform>().localScale = new Vector3(size * 0.6f, size * 0.6f, 1f);
         //assign components
         rb = GetComponent<Rigidbody2D>();
 
