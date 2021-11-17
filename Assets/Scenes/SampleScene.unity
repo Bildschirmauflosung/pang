@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 566247513}
   - component: {fileID: 566247511}
   - component: {fileID: 566247515}
+  - component: {fileID: 566247512}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Floor
@@ -246,6 +247,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &566247512
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 566247510}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.0049444884}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0098889}
+  m_EdgeRadius: 0
 --- !u!212 &566247513
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -324,7 +351,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.00000017881393}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -335,7 +362,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.9999995}
   m_EdgeRadius: 0
 --- !u!1 &1208748077
 GameObject:
@@ -463,7 +490,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1208748077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03, y: -4.05, z: 0}
+  m_LocalPosition: {x: 0.03, y: -4.1, z: 0}
   m_LocalScale: {x: 0.6843, y: 1.4018, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -481,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ae2c837fbe7a94f8f48aa44812ebae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hook: {fileID: 4260417377479210998, guid: e8015cc992bdc164988fb57e2f41bb8a, type: 3}
   speed: 4
 --- !u!1 &1402423229
 GameObject:
@@ -494,7 +522,7 @@ GameObject:
   - component: {fileID: 1402423230}
   m_Layer: 0
   m_Name: GameMap
-  m_TagString: Untagged
+  m_TagString: Bound
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -550,11 +578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2854773657035385562, guid: 15b5c7250faa48847ae1a7e0bfb9b968, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.13
+      value: 1.63
       objectReference: {fileID: 0}
     - target: {fileID: 2854773657035385562, guid: 15b5c7250faa48847ae1a7e0bfb9b968, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.85
+      value: -0.8
       objectReference: {fileID: 0}
     - target: {fileID: 2854773657035385562, guid: 15b5c7250faa48847ae1a7e0bfb9b968, type: 3}
       propertyPath: m_LocalPosition.z
@@ -592,5 +620,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ball
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4070488267220841856, guid: 15b5c7250faa48847ae1a7e0bfb9b968, type: 3}
+      propertyPath: m_Radius
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 4070488267220841856, guid: 15b5c7250faa48847ae1a7e0bfb9b968, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 15b5c7250faa48847ae1a7e0bfb9b968, type: 3}

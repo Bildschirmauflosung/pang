@@ -8,7 +8,7 @@ public class BallControler : MonoBehaviour
     public int size;
     float speedX, speedY;
     bool right = true;
-
+    
     //create components
     public GameObject ball;
     Rigidbody2D rb;
@@ -25,10 +25,10 @@ public class BallControler : MonoBehaviour
         {
             case 1:
                 speedX = 2.5f;
-                speedY = 6.8f;
+                speedY = 6f;
                 break;
             case 2:
-                speedX = 3.7f;
+                speedX = 3.3f;
                 speedY = 8f;
                 break;
             case 3:
@@ -43,11 +43,11 @@ public class BallControler : MonoBehaviour
 
         if (right)
         {
-            rb.velocity = new Vector2(speedX, speedY);
+            rb.velocity = new Vector2(speedX/2, speedY/2);
         }
         else
         {
-            rb.velocity = new Vector2(-speedX, speedY);  //moving ball 
+            rb.velocity = new Vector2(-speedX/2, speedY/2);  //moving ball 
         }
 
 
@@ -57,8 +57,8 @@ public class BallControler : MonoBehaviour
 
     private void Burst()
     {
-        Vector3 asd1 = transform.position + new Vector3(0.5f, 1f, 0f);
-        Vector3 asd2 = transform.position + new Vector3(-0.5f, 1f, 0f);
+        Vector3 asd1 = transform.position + new Vector3(0.3f, 0f, 0f);
+        Vector3 asd2 = transform.position + new Vector3(-0.3f, 0f, 0f);
         GameObject pref1 = Instantiate(ball, asd1, Quaternion.identity);
         pref1.GetComponent<BallControler>().size = size - 1;
         GameObject pref2 = Instantiate(ball, asd2, Quaternion.identity);
@@ -69,27 +69,40 @@ public class BallControler : MonoBehaviour
 
     private void Bounce()
     {
-        
+        Debug.Log("Bounce");
             if (rb.velocity.x > 0)
             {
                 rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
-                rb.velocity = new Vector2(speedX, speedY);  //moving ball according to size
+                rb.velocity = new Vector2(speedX, speedY);  //bouncing ball right
             }
             else
             {
                 rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
-                rb.velocity = new Vector2(-speedX, speedY);  //moving ball according to size
-            }
+                rb.velocity = new Vector2(-speedX, speedY);  //bouncing ball left
+        }
 
     }
+
+    private void ballShot() ///when ball is shot
+    {
+        if (size > 1)
+            Burst();
+        else
+            Destroy(ball);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Hook"))
         {
-            if (size > 1)
-                Burst();
-            else
-                Destroy(ball);
+            collision.gameObject.GetComponent<Hook>().Crash();
+            ballShot();
+
+        }
+        else if (collision.CompareTag("Chain"))
+        { 
+            collision.gameObject.GetComponent<Chain>().Crash();
+            ballShot();
         }
         else if (collision.CompareTag("Floor"))
         {
@@ -100,6 +113,7 @@ public class BallControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //rb.velocity = new Vector2(3f, 3f) * (rb.velocity.normalized);
     }
 }

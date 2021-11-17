@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ball
   - Floor
+  - Chain
+  - Hook
+  - Bound
   layers:
   - Default
   - TransparentFX

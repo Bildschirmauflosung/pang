@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private bool jumped;
+    public GameObject hook;
     Rigidbody2D rigid;
     public float speed = 10f;
 
@@ -14,13 +14,15 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        jumped = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown("space"))
+        {
+            Instantiate(hook, transform.position - new Vector3(0f, 0.5f), Quaternion.identity);
+        }
     }
 
     void FixedUpdate()
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.position += new Vector3(speed * Time.deltaTime, 0f, 0f);
         }
+        
     }
 
     
