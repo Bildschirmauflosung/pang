@@ -45,6 +45,6 @@ public class Hook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0f, 5f*Time.deltaTime, 0f); //moves hook up
+        transform.position += new Vector3(0f, 6f*Time.deltaTime, 0f); //moves hook up
     }
 }

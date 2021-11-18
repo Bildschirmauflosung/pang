@@ -88,6 +88,16 @@ public class BallControler : MonoBehaviour
             Burst();
         else
             Destroy(ball);
+
+        //remove inactive balls from scene
+        GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+        foreach (GameObject ball in balls)
+        {
+            if (ball.activeInHierarchy && !ball.GetComponent<CircleCollider2D>().enabled)
+            {
+                Destroy(ball);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
