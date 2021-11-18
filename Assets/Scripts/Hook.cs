@@ -11,6 +11,7 @@ public class Hook : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.hookDeployed = true;
         ChainList.Add(hak);
         InvokeRepeating("leaveTrack", 0.0001f, 0.1f);
     }
@@ -22,6 +23,7 @@ public class Hook : MonoBehaviour
         {
             Destroy(chain);
         }
+        GameManager.instance.hookDeployed = false;
     }
 
     private void leaveTrack() ///leaves chains after shot

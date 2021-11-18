@@ -8,7 +8,7 @@ public class BallControler : MonoBehaviour
     public int size;
     float speedX, speedY;
     bool right = true;
-    
+
     //create components
     public GameObject ball;
     Rigidbody2D rb;
@@ -69,7 +69,6 @@ public class BallControler : MonoBehaviour
 
     private void Bounce()
     {
-        Debug.Log("Bounce");
             if (rb.velocity.x > 0)
             {
                 rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
@@ -113,7 +112,7 @@ public class BallControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
         //rb.velocity = new Vector2(3f, 3f) * (rb.velocity.normalized);
     }
 }

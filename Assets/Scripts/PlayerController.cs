@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject hook;
+    GameObject hak;
     Rigidbody2D rigid;
     public float speed = 10f;
 
@@ -21,7 +22,11 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown("space"))
         {
-            Instantiate(hook, transform.position - new Vector3(0f, 0.5f), Quaternion.identity);
+            if (GameManager.instance.hookDeployed)
+            {
+                hak.GetComponent<Hook>().Crash();
+            }
+            hak = Instantiate(hook, transform.position - new Vector3(0f, 0.5f), Quaternion.identity);
         }
     }
 
