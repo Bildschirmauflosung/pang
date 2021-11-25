@@ -35,7 +35,7 @@ public class Hook : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bound"))
+        if (collision.CompareTag("Bound") || collision.CompareTag("PlatformTop"))
         {
             Crash();
         }

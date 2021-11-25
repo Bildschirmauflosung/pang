@@ -11,7 +11,8 @@ public class BallControler : MonoBehaviour
 
     //create components
     public GameObject ball;
-    Rigidbody2D rb;
+    private Vector2 speed;
+    private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +56,7 @@ public class BallControler : MonoBehaviour
 
 
 
-    private void Burst()
+    private void Burst() ///split the ball
     {
         Vector3 asd1 = transform.position + new Vector3(0.3f, 0f, 0f);
         Vector3 asd2 = transform.position + new Vector3(-0.3f, 0f, 0f);
@@ -67,7 +68,7 @@ public class BallControler : MonoBehaviour
         pref2.GetComponent<BallControler>().right = false;
     }
 
-    private void Bounce()
+    private void Bounce() ///bounce ball from floor
     {
             if (rb.velocity.x > 0)
             {
@@ -109,7 +110,7 @@ public class BallControler : MonoBehaviour
 
         }
         else if (collision.CompareTag("Chain"))
-        { 
+        {
             collision.gameObject.GetComponent<Chain>().Crash();
             ballShot();
         }
@@ -117,7 +118,22 @@ public class BallControler : MonoBehaviour
         {
             Bounce();
         }
+        else if (collision.CompareTag("Platform"))
+        {
+            Debug.Log("?");
+            if (rb.velocity.x > 0)
+            {
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(speedX, rb.velocity.y);
+            }
+            else
+            {
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(-speedX, rb.velocity.y);
+            }
+        }
     }
+   
 
     // Update is called once per frame
     void Update()

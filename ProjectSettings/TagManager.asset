@@ -9,6 +9,7 @@ TagManager:
   - Chain
   - Hook
   - Bound
+  - Platform
   layers:
   - Default
   - TransparentFX
