@@ -28,7 +28,7 @@ public class Hook : MonoBehaviour
 
     private void leaveTrack() ///leaves chains after shot
     {
-        GameObject pref1 = Instantiate(chain, transform.position, Quaternion.identity);
+        GameObject pref1 = Instantiate(chain, transform.position - new Vector3(-0.02f, 0.5f), Quaternion.identity);
         pref1.GetComponent<Chain>().head = hak;
         ChainList.Add(pref1);
     }
