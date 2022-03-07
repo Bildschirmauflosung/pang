@@ -9,7 +9,7 @@ public class Chain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        head = GameObject.FindGameObjectWithTag("Hook");
     }
 
     public void Crash() ///when something crashes into the chain
@@ -20,6 +20,9 @@ public class Chain : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(head == null)
+        {
+            head = GameObject.FindGameObjectWithTag("Hook");
+        }
     }
 }

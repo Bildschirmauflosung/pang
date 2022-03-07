@@ -5,9 +5,11 @@ using UnityEngine;
 public class BallControler : MonoBehaviour
 {
     //create neccessary variables
+    float vectY;
     public int size;
     float speedX, speedY;
     bool right = true;
+    public bool loaded = false;
 
     //create components
     public GameObject ball;
@@ -25,11 +27,11 @@ public class BallControler : MonoBehaviour
         switch (size)
         {
             case 1:
-                speedX = 2.5f;
+                speedX = 2.1f;
                 speedY = 6f;
                 break;
             case 2:
-                speedX = 3.3f;
+                speedX = 3f;
                 speedY = 8f;
                 break;
             case 3:
@@ -41,16 +43,21 @@ public class BallControler : MonoBehaviour
                 speedY = 1f;
                 break;
         }
-
-        if (right)
-        {
-            rb.velocity = new Vector2(speedX/2, speedY/2);
+        if (!loaded) 
+        { 
+            if (right)
+            {
+                rb.velocity = new Vector2(speedX/2, speedY/2);
+            }
+            else
+            {
+                rb.velocity = new Vector2(-speedX/2, speedY/2);  //moving ball 
+            }
         }
         else
         {
-            rb.velocity = new Vector2(-speedX/2, speedY/2);  //moving ball 
+            loaded = false;
         }
-
 
     }
 
@@ -85,10 +92,14 @@ public class BallControler : MonoBehaviour
 
     private void ballShot() ///when ball is shot
     {
+        GameManager.instance.stagePoints += 100;
         if (size > 1)
             Burst();
         else
+        {
             Destroy(ball);
+            GameManager.instance.checkWin();
+        }
 
         //remove inactive balls from scene
         GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
@@ -107,7 +118,6 @@ public class BallControler : MonoBehaviour
         {
             collision.gameObject.GetComponent<Hook>().Crash();
             ballShot();
-
         }
         else if (collision.CompareTag("Chain"))
         {
@@ -120,7 +130,6 @@ public class BallControler : MonoBehaviour
         }
         else if (collision.CompareTag("Platform"))
         {
-            Debug.Log("?");
             if (rb.velocity.x > 0)
             {
                 rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
@@ -138,7 +147,53 @@ public class BallControler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // make sure x speed stays within range (necessary for corners of platforms)
+        if (size == 3)
+        {
+            if (rb.velocity.x > 3.93 || (rb.velocity.x > 0 && rb.velocity.x < 3.9))
+            {
+                vectY = rb.velocity.y;
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(3.92327f, vectY);
+            }
+            if (rb.velocity.x < -3.93 || (rb.velocity.x < 0 && rb.velocity.x > -3.9))
+            {
+                vectY = rb.velocity.y;
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(-3.92327f, vectY);
+            }
+        }
+        else if (size == 2)
+        {
+            if (rb.velocity.x > 3 || (rb.velocity.x > 0 && rb.velocity.x < 2.9))
+            {
+                vectY = rb.velocity.y;
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(2.95f, vectY);
+            }
+            if (rb.velocity.x < -3 || (rb.velocity.x < 0 && rb.velocity.x > -2.9))
+            {
+                vectY = rb.velocity.y;
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(-2.95f, vectY);
+            }
+        }
+        else if (size == 1)
+        {
+            if (rb.velocity.x > 2.1 || (rb.velocity.x > 0 && rb.velocity.x < 2))
+            {
+                vectY = rb.velocity.y;
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(2.05f, vectY);
+            }
+            if (rb.velocity.x < -2.1 || (rb.velocity.x < 0 && rb.velocity.x > -2))
+            {
+                vectY = rb.velocity.y;
+                rb.AddForce(new Vector2(-rb.velocity.x, -rb.velocity.y));
+                rb.velocity = new Vector2(-2.05f, vectY);
+            }
+        }
+
         //rb.velocity = new Vector2(3f, 3f) * (rb.velocity.normalized);
     }
 }

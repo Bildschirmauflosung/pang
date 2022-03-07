@@ -10,16 +10,20 @@ TagManager:
   - Hook
   - Bound
   - Platform
+  - BreakPlatform
+  - Ladder
+  - BallTrigger
+  - Menu
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
   - Balls
-  - 
-  - 
+  - Map
+  - TriggerBall
   - 
   - 
   - 
@@ -44,6 +48,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Map
+    uniqueID: 1323927429
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

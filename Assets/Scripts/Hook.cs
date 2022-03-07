@@ -6,45 +6,62 @@ public class Hook : MonoBehaviour
 {
     public GameObject chain;
     public GameObject hak;
-    private List<GameObject> ChainList = new List<GameObject>();
+    bool pause;
 
     // Start is called before the first frame update
     void Start()
     {
+        pause = false;
         GameManager.instance.hookDeployed = true;
-        ChainList.Add(hak);
-        InvokeRepeating("leaveTrack", 0.0001f, 0.1f);
+        InvokeRepeating("leaveTrack", 0.0001f, 0.15f);
     }
 
-        public void Crash() ///when hook crashes into something
+    public void pauseHook()
     {
+        CancelInvoke("leaveTrack");
+        pause = true;
+    }
 
-        foreach(GameObject chain in ChainList)
-        {
-            Destroy(chain);
+    public void unpauseHook()
+    {
+        InvokeRepeating("leaveTrack", 0.0001f, 0.15f);
+        pause = false;
+    }
+
+    public void Crash() ///when hook crashes into something
+    {
+        GameObject[] chains = GameObject.FindGameObjectsWithTag("Chain");
+        foreach (GameObject chain in chains)
+        {    
+            Destroy(chain); 
         }
         GameManager.instance.hookDeployed = false;
+        Destroy(hak);
     }
 
     private void leaveTrack() ///leaves chains after shot
     {
-        GameObject pref1 = Instantiate(chain, transform.position - new Vector3(-0.02f, 0.5f), Quaternion.identity);
-        pref1.GetComponent<Chain>().head = hak;
-        ChainList.Add(pref1);
+        GameObject pref1 = Instantiate(chain, transform.position - new Vector3(-0.02f, 0.22f), Quaternion.identity);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bound") || collision.CompareTag("PlatformTop"))
+        if (collision.CompareTag("Bound") || collision.CompareTag("Platform"))
         {
             Crash();
         }
-
+        else if (collision.CompareTag("BreakPlatform"))
+        {
+            Crash();
+            GameManager.instance.stagePoints += 50;
+            Destroy(collision.gameObject);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(0f, 6f*Time.deltaTime, 0f); //moves hook up
+        if(!pause)
+            transform.position += new Vector3(0f, 6f*Time.deltaTime, 0f); //moves hook up
     }
 }
