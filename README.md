@@ -4,7 +4,7 @@ Własna imprelemtacja gry "Pang". Gra została napisana w silniku Unity.
 
 ## Uruchamianie gry
 
-Grę należy pobrać z [tego](https://filetransfer.io/data-package/248NxE5h#link) linku. Pobrany zip trzeba rozpakować. Grę uruchamiamy otwierając plik **pang.exe**.
+Grę należy pobrać z [tego](https://filetransfer.io/data-package/2JlXMchM#link) linku. Pobrany zip trzeba rozpakować. Grę uruchamiamy otwierając plik **pang.exe**.
 
 ## Wygląd
 
